@@ -52,4 +52,8 @@ public class Utils {
 		return doubleInput;
 	}
 
+	public Float getFloat() {
+		return scanner.nextFloat();
+	}
+
 }
