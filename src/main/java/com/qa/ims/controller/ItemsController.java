@@ -36,13 +36,7 @@ public class ItemsController implements  CrudController<Items> {
 
 	@Override
 	public Items create() {
-//		LOGGER.info("Please enter the Item name");
-//		String itemName = utils.getString();
-//		LOGGER.info("Please enter the item price");
-//		long itemPrice = utils.getLong();
-//		Items item = itemsDao.create(new Items(itemName, itemPrice));
-//		LOGGER.info("item created");
-//		return item;
+
 		
 		LOGGER.info("Please enter item name");
 		String itemName= utils.getString();
@@ -55,22 +49,22 @@ public class ItemsController implements  CrudController<Items> {
 
 	@Override
 	public Items update() {
-		LOGGER.info("Please enter the Iid of the customer you would like to update");
-		Long Iid = utils.getLong();
+		LOGGER.info("Please enter the Item_id of the customer you would like to update");
+		Long Item_id = utils.getLong();
 		LOGGER.info("Please enter the Item Name");
 		String itemName = utils.getString();
 		LOGGER.info("Please enter the price");
 		long itemPrice= utils.getLong();
-		Items item = itemsDao.create(new Items(Iid, itemName, itemPrice));
+		Items item = itemsDao.create(new Items(Item_id, itemName, itemPrice));
 		LOGGER.info("Customer Updated");
 		return item;
 	}
 
 	@Override
 	public int delete() {
-		LOGGER.info("Please enter the Iid of the customer you would like to delete");
-		Long Iid = utils.getLong();
-		return itemsDao.delete(Iid);
+		LOGGER.info("Please enter the Item_id of the customer you would like to delete");
+		Long Item_id = utils.getLong();
+		return itemsDao.delete(Item_id);
 	}
 
 }
