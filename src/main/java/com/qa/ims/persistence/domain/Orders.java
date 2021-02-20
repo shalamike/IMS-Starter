@@ -13,7 +13,7 @@ public class Orders {
 		this.setItemQuantity(itemQuantity);
 	}
 	
-	public Orders(long, Order_id, long Cust_id, Long Item_id, float itemQuantity) {
+	public Orders(long Order_id, long Cust_id, Long Item_id, float itemQuantity) {
 		this.setOrder_id(Order_id);
 		this.setCust_id(getCust_id());
 		this.setItem_id(Item_id);
