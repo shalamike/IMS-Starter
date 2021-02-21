@@ -36,13 +36,6 @@ public class ItemsController implements  CrudController<Items> {
 
 	@Override
 	public Items create() {
-//		LOGGER.info("Please enter the Item name");
-//		String itemName = utils.getString();
-//		LOGGER.info("Please enter the item price");
-//		long itemPrice = utils.getLong();
-//		Items item = itemsDao.create(new Items(itemName, itemPrice));
-//		LOGGER.info("item created");
-//		return item;
 		
 		LOGGER.info("Please enter item name");
 		String itemName= utils.getString();

@@ -117,7 +117,7 @@ public class OrdersDAO implements Dao<Orders>{
 		Long Item_id = resultSet.getLong("Item_id");
 		Long Cust_id = resultSet.getLong("Cust_id");
 		Long Order_id = resultSet.getLong("Order_id");
-		float item_quantity = resultSet.getFloat("item_quantity"))
+		float item_quantity = resultSet.getFloat("item_quantity");
 		return new Orders(Order_id, Cust_id, Item_id, item_quantity);
 	}
 

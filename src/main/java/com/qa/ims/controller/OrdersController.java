@@ -35,20 +35,37 @@ public class OrdersController implements CrudController<Orders>{
 
 	@Override
 	public Orders create() {
-		// TODO Auto-generated method stub
-		return null;
+		LOGGER.info("Please enter a valid Cust_is");
+		Long custId= utils.getLong();
+		LOGGER.info("Please enter a valid item_id");
+		Long itemId= utils.getLong();
+		LOGGER.info("Please enter the quantity");
+		Long quantity = utils.getLong();
+		Orders order= ordersDao.create(new Orders(custId, itemId, quantity));
+		LOGGER.info("item created");
+		return order;
 	}
 
 	@Override
 	public Orders update() {
-		// TODO Auto-generated method stub
-		return null;
+		LOGGER.info("please enter the OrderId of the order you wish to update");
+		Long orderId = utils.getLong();
+		LOGGER.info("Please enter the new CustID");
+		Long CustId = utils.getLong();
+		LOGGER.info("please enter the new itemId");
+		Long itemId = utils.getLong();
+		LOGGER.info("please enter the new quantity");
+		float quantity = utils.getFloat();
+		return ordersDao.create(new Orders(orderId, CustId, itemId, quantity));
+		
+		
 	}
 
 	@Override
 	public int delete() {
-		// TODO Auto-generated method stub
-		return 0;
+		LOGGER.info("please enter the Order_id you wish to delete");
+		Long orderId = utils.getLong();
+		return ordersDao.delete(orderId);
 	}
 
 }
