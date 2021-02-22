@@ -15,11 +15,10 @@ public class Orders {
 	
 	public Orders(long Order_id, long Cust_id, Long Item_id, float itemQuantity) {
 		this.setOrder_id(Order_id);
-		this.setCust_id(getCust_id());
+		this.setCust_id(Cust_id);
 		this.setItem_id(Item_id);
 		this.setItemQuantity(itemQuantity);
 	}
-	
 	public Long getCust_id() {
 		return Cust_id;
 	}
@@ -43,6 +42,10 @@ public class Orders {
 	}
 	public void setItemQuantity(float itemQuantity) {
 		this.itemQuantity = itemQuantity;
+	}
+	
+	public String toString() {
+		return "Order_ID: " + this.Order_id + ", Cust_Id: " + this.Cust_id + ", item_ID: " + this.Item_id + ", item quantity: " + this.itemQuantity;
 	}
 
 	
