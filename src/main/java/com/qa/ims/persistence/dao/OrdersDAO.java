@@ -73,12 +73,13 @@ public class OrdersDAO implements Dao<Orders>{
 	public Orders update(Orders order) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("INSERT INTO orders(Cust_id, Item_id, item_quantity) VALUES (?, ?, ?)");) {
+						.prepareStatement("UPDATE orders set Cust_id = ?, Item_id = ?, item_quantity = ? WHERE Order_id = ?");) {
 			statement.setLong(1, order.getCust_id());
 			statement.setLong(2, order.getItem_id());
 			statement.setFloat(3, order.getItemQuantity());
+			statement.setFloat(4, order.getOrder_id());
 			statement.executeUpdate();
-			return readLatest();
+			return read(order.getOrder_id());
 		} catch (Exception e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
@@ -102,7 +103,7 @@ public class OrdersDAO implements Dao<Orders>{
 	@Override
 	public int delete(long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("DELETE FROM orders WHERE Order_id= ?");) {
+				PreparedStatement statement = connection.prepareStatement("DELETE FROM orders WHERE Order_id = ?");) {
 			statement.setLong(1, id);
 			return statement.executeUpdate();
 		} catch (Exception e) {
