@@ -11,7 +11,6 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.qa.ims.persistence.domain.Items;
 import com.qa.ims.persistence.domain.Orders;
 import com.qa.ims.utils.DBUtils;
 
@@ -56,7 +55,11 @@ public class OrdersDAO implements Dao<Orders>{
 	@Override
 	public Orders read(Long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders WHERE order_id = ?");) {
+				PreparedStatement statement = connection.prepareStatement("Select  `orders`.`order_id`, `orders`.`Cust_id`, `orders`.`Item_id` , `customers`.`first_name`,`customers`.`surname`, `items`.`item_name`, \r\n"
+						+ "`items`.`item_price`, `orders`.`item_quantity`, Round((`items`.`item_price` * `orders`.`item_quantity`),2) as 'total order cost'\r\n"
+						+ "from `orders`, `items`, `customers`\r\n"
+						+ "where `orders`.`Item_id` = `items`.`Item_id`\r\n"
+						+ "and `orders`.`Cust_id` = `customers`.`Cust_id`");) {
 			statement.setLong(1, id);
 			try (ResultSet resultSet = statement.executeQuery();) {
 				resultSet.next();
@@ -107,7 +110,11 @@ public class OrdersDAO implements Dao<Orders>{
 	private Orders readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders ORDER BY Order_id DESC LIMIT 1");) {
+				ResultSet resultSet = statement.executeQuery("Select  `orders`.`order_id`, `orders`.`Cust_id`, `orders`.`Item_id` , `customers`.`first_name`,`customers`.`surname`, `items`.`item_name`, \r\n"
+						+ "`items`.`item_price`, `orders`.`item_quantity`, Round((`items`.`item_price` * `orders`.`item_quantity`),2) as 'total order cost'\r\n"
+						+ "from `orders`, `items`, `customers`\r\n"
+						+ "where `orders`.`Item_id` = `items`.`Item_id`\r\n"
+						+ "and `orders`.`Cust_id` = `customers`.`Cust_id` ORDER BY Order_id");) {
 			resultSet.next();
 			return modelFromResultSet(resultSet);
 		} catch (Exception e) {
