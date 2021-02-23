@@ -2,40 +2,57 @@ package com.qa.ims.persistence.domain;
 
 public class Orders {
 	
-	private Long Cust_id;
-	private Long Item_id;
-	private Long Order_id;
+	private Long custId;
+	private Long itemId;
+	private Long orderId;
+	private float itemPrice;
 	private float itemQuantity;
+	private float orderCost;
+	private String customerName;
+	private String itemName;
 	
-	public Orders(Long Cust_id, Long Item_id, float itemQuantity) {
-		this.setCust_id(Cust_id);
-		this.setItem_id(Item_id);
+	
+	public Orders(Long custId, Long itemId, float itemQuantity) {
+		this.setcustId(custId);
+		this.setitemId(itemId);
 		this.setItemQuantity(itemQuantity);
 	}
 	
-	public Orders(Long Order_id, Long Cust_id, Long Item_id, float itemQuantity) {
-		this.setOrder_id(Order_id);
-		this.setCust_id(Cust_id);
-		this.setItem_id(Item_id);
+	public Orders(Long orderId, Long custId, Long itemId, float itemQuantity) {
+		this.setorderId(orderId);
+		this.setcustId(custId);
+		this.setitemId(itemId);
 		this.setItemQuantity(itemQuantity);
 	}
-	public Long getCust_id() {
-		return Cust_id;
+		
+		public Orders(Long orderId, Long custId, Long itemId, String firstName, String lastName, String itemName, float itemPrice ,float itemQuantity) {
+			this.setorderId(orderId);
+			this.setcustId(custId);
+			this.setitemId(itemId);
+			this.setItemQuantity(itemQuantity);
+			this.setItemPrice(itemPrice);
+			this.setCustomerName(firstName + " " + lastName);
+			this.setItemName(itemName);
+			this.setOrderCost(this.itemPrice * this.itemQuantity);
+			
 	}
-	public void setCust_id(Long cust_id) {
-		Cust_id = cust_id;
+	public Long getcustId() {
+		return custId;
 	}
-	public Long getItem_id() {
-		return Item_id;
+	public void setcustId(Long custId) {
+		this.custId = custId;
 	}
-	public void setItem_id(Long item_id) {
-		Item_id = item_id;
+	public Long getitemId() {
+		return itemId;
 	}
-	public Long getOrder_id() {
-		return Order_id;
+	public void setitemId(Long itemId) {
+		this.itemId = itemId;
 	}
-	public void setOrder_id(Long order_id) {
-		Order_id = order_id;
+	public Long getorderId() {
+		return orderId;
+	}
+	public void setorderId(Long orderId) {
+		this.orderId = orderId;
 	}
 	public float getItemQuantity() {
 		return itemQuantity;
@@ -44,12 +61,50 @@ public class Orders {
 		this.itemQuantity = itemQuantity;
 	}
 	
-	public String toString() {
-		return "Order_ID: " + this.Order_id + ", Cust_Id: " + this.Cust_id + ", item_ID: " + this.Item_id + ", item quantity: " + this.itemQuantity;
+	public float getorderCost() {
+		return orderCost;
 	}
 
-	
-	
+	public void setorderCost(float orderCost) {
+		this.orderCost = orderCost;
+	}
 
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+
+	public float getOrderCost() {
+		return orderCost;
+	}
+
+	public void setOrderCost(float orderCost) {
+		this.orderCost = orderCost;
+	}
+
+	public float getItemPrice() {
+		return itemPrice;
+	}
+
+	public void setItemPrice(float itemPrice) {
+		this.itemPrice = itemPrice;
+	}
+	
+	
+	public String toString() {
+		return "orderID: " + this.orderId + ", Customer Name: " + this.customerName + ", item name: " + this.itemName + ", Item Price: " + this.itemPrice + ", Item quantity: " + this.itemQuantity + ", total_cost " + this.orderCost;
+		//return "orderId: " + this.orderId + ", custId: " + this.custId + ", itemId: " + this.itemId + ", item quantity: " + this.itemQuantity;
+	}
 
 }

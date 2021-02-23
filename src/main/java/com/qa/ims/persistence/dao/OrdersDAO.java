@@ -20,10 +20,27 @@ public class OrdersDAO implements Dao<Orders>{
 	public static final Logger LOGGER = LogManager.getLogger();
 	
 	@Override
+	public Orders modelFromResultSet(ResultSet resultSet) throws SQLException {
+		Long Item_id = resultSet.getLong("Item_id");
+		Long Cust_id = resultSet.getLong("Cust_id");
+		Long Order_id = resultSet.getLong("Order_id");
+		float item_quantity = resultSet.getFloat("item_quantity");
+		float item_price = resultSet.getFloat("item_price");
+		String first_name = resultSet.getString("first_name");
+		String surname = resultSet.getString("surname");
+		String item_Name = resultSet.getString("item_name");
+		return new Orders(Order_id, Cust_id, Item_id, first_name, surname, item_Name, item_price, item_quantity);
+	}
+	
+	@Override
 	public List<Orders> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders");) {
+				ResultSet resultSet = statement.executeQuery("Select  `orders`.`order_id`, `orders`.`Cust_id`, `orders`.`Item_id` , `customers`.`first_name`,`customers`.`surname`, `items`.`item_name`, \r\n"
+						+ "`items`.`item_price`, `orders`.`item_quantity`, Round((`items`.`item_price` * `orders`.`item_quantity`),2) as 'total order cost'\r\n"
+						+ "from `orders`, `items`, `customers`\r\n"
+						+ "where `orders`.`Item_id` = `items`.`Item_id`\r\n"
+						+ "and `orders`.`Cust_id` = `customers`.`Cust_id`");) {
 			List<Orders> orders = new ArrayList<>();
 			while (resultSet.next()) {
 				orders.add(modelFromResultSet(resultSet));
@@ -57,8 +74,8 @@ public class OrdersDAO implements Dao<Orders>{
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
 						.prepareStatement("INSERT INTO orders(Cust_id, Item_id, item_quantity) VALUES (?, ?, ?)");) {
-			statement.setLong(1, order.getCust_id());
-			statement.setLong(2, order.getItem_id());
+			statement.setLong(1, order.getcustId());
+			statement.setLong(2, order.getitemId());
 			statement.setFloat(3, order.getItemQuantity());
 			statement.executeUpdate();
 			return readLatest();
@@ -74,12 +91,12 @@ public class OrdersDAO implements Dao<Orders>{
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
 						.prepareStatement("UPDATE orders set Cust_id = ?, Item_id = ?, item_quantity = ? WHERE Order_id = ?");) {
-			statement.setLong(1, order.getCust_id());
-			statement.setLong(2, order.getItem_id());
+			statement.setLong(1, order.getcustId());
+			statement.setLong(2, order.getitemId());
 			statement.setFloat(3, order.getItemQuantity());
-			statement.setFloat(4, order.getOrder_id());
+			statement.setFloat(4, order.getorderId());
 			statement.executeUpdate();
-			return read(order.getOrder_id());
+			return read(order.getorderId());
 		} catch (Exception e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
@@ -111,15 +128,6 @@ public class OrdersDAO implements Dao<Orders>{
 			LOGGER.error(e.getMessage());
 		}
 		return 0;
-	}
-
-	@Override
-	public Orders modelFromResultSet(ResultSet resultSet) throws SQLException {
-		Long Item_id = resultSet.getLong("Item_id");
-		Long Cust_id = resultSet.getLong("Cust_id");
-		Long Order_id = resultSet.getLong("Order_id");
-		float item_quantity = resultSet.getFloat("item_quantity");
-		return new Orders(Order_id, Cust_id, Item_id, item_quantity);
 	}
 
 }
