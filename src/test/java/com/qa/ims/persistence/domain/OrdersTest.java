@@ -6,13 +6,18 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+
 public class OrdersTest {
 	
 	Orders o1 = new Orders(1l, 1l, 4f);
 	Orders o2 = new Orders(1l, 2l, 1l, 4f);
 	Orders o3 = new Orders(2l,1l, 2l, "mike", "larry", "coke", 0.5f, 10f);
 	
-	
+	@Test
+	public void testEquals() {
+		EqualsVerifier.simple().forClass(Orders.class).verify();
+	}
 	@Test 
 	public void testConstructor() {
 		assertTrue(o1 instanceof Orders);
@@ -54,6 +59,7 @@ public class OrdersTest {
 		assertSame(2l, o3.getorderId());
 	}
 	
+	@Test
 	public void testSetOrderId() {
 		Orders o = new Orders(2l,1l, 2l, "dee", "jay", "coke", 3f, 1000f);
 		o.setorderId(1l);
@@ -66,6 +72,5 @@ public class OrdersTest {
 	}
 	@Test
 	public void testSetCustomerId() {}
-	
 	
 }

@@ -8,9 +8,17 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+
 public class ItemsTest { 
 	Items coke = new Items("coke", 1.5f);
 	Items hat= new Items(1l, "hat", 5f);
+	
+	@Test
+	public void testEquals() {
+		EqualsVerifier.simple().forClass(Items.class).verify();
+	}
+	
 	
 	@Test
 	public void testConstructor(){
@@ -54,4 +62,6 @@ public class ItemsTest {
 		Items tv = new Items(4l, "tv", 100f);
 		assertEquals("Item_id: 4, Item Name: tv, item price: 100.0", tv.toString());
 	}
+	
+	
 }

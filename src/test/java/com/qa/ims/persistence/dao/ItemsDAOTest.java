@@ -1,14 +1,18 @@
 package com.qa.ims.persistence.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
+
 import com.qa.ims.persistence.domain.Items;
+import com.qa.ims.persistence.domain.Orders;
 import com.qa.ims.utils.DBUtils;
 
 public class ItemsDAOTest {
@@ -60,11 +64,42 @@ public class ItemsDAOTest {
 		assertEquals(updated, DAO.update(updated));
 
 	}
-
+	
 	@Test
 	public void testDelete() {
 		assertEquals(1, DAO.delete(1));
 	}
+
+	@Test
+	public void TestSqlException1() {
+		DBUtils.connect("dbsldfnsdf");
+		DAO.create(new Items(1l,"crisps", 1f));
+		assertEquals(0, DAO.delete(1));
+	}
+	@Test
+	public void TestSqlException2() {
+		DBUtils.connect("dbsldfnsdf");
+		final Items updated = new Items(1l,"crisps", 1f);
+		assertNull( DAO.update(updated));
+	}
 	
+	@Test
+	public void TestSqlException3() {
+		DBUtils.connect("dbsldfnsdf");
+		//assertEquals(new Items(1l,"crisps", 1f), DAO.read(1l));
+		assertNull(DAO.read(1l));
+	}
 	
+	@Test
+	public void TestSqlException4() {
+		DBUtils.connect("dbsldfnsdf");
+		ArrayList<Items> empty = new ArrayList<Items>();
+		assertEquals( empty, DAO.readAll());
+	}
+	
+	@Test
+	public void TestSqlException5() {
+		DBUtils.connect("dbsldfnsdf");
+		 assertNull( DAO.readLatest());
+	}
 }

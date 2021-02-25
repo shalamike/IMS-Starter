@@ -36,7 +36,7 @@ public class OrdersDAO implements Dao<Orders>{
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("Select  `orders`.`order_id`, `orders`.`Cust_id`, `orders`.`Item_id` , `customers`.`first_name`,`customers`.`surname`, `items`.`item_name`, \r\n"
-						+ "`items`.`item_price`, `orders`.`item_quantity`, Round((`items`.`item_price` * `orders`.`item_quantity`),2) as 'total order cost'\r\n"
+						+ "`items`.`item_price`, `orders`.`item_quantity`, (`items`.`item_price` * `orders`.`item_quantity`)'\r\n"
 						+ "from `orders`, `items`, `customers`\r\n"
 						+ "where `orders`.`Item_id` = `items`.`Item_id`\r\n"
 						+ "and `orders`.`Cust_id` = `customers`.`Cust_id`");) {
@@ -56,7 +56,7 @@ public class OrdersDAO implements Dao<Orders>{
 	public Orders read(Long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection.prepareStatement("Select  `orders`.`order_id`, `orders`.`Cust_id`, `orders`.`Item_id` , `customers`.`first_name`,`customers`.`surname`, `items`.`item_name`, \r\n"
-						+ "`items`.`item_price`, `orders`.`item_quantity`, Round((`items`.`item_price` * `orders`.`item_quantity`),2) as 'total order cost'\r\n"
+						+ "`items`.`item_price`, `orders`.`item_quantity`, (`items`.`item_price` * `orders`.`item_quantity`)\r\n"
 						+ "from `orders`, `items`, `customers`\r\n"
 						+ "where `orders`.`Item_id` = `items`.`Item_id`\r\n"
 						+ "and `orders`.`Cust_id` = `customers`.`Cust_id`");) {
@@ -107,11 +107,11 @@ public class OrdersDAO implements Dao<Orders>{
 		return null;
 	}
 
-	private Orders readLatest() {
+	public Orders readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
 				ResultSet resultSet = statement.executeQuery("Select  `orders`.`order_id`, `orders`.`Cust_id`, `orders`.`Item_id` , `customers`.`first_name`,`customers`.`surname`, `items`.`item_name`, \r\n"
-						+ "`items`.`item_price`, `orders`.`item_quantity`, Round((`items`.`item_price` * `orders`.`item_quantity`),2) as 'total order cost'\r\n"
+						+ "`items`.`item_price`, `orders`.`item_quantity`, (`items`.`item_price` * `orders`.`item_quantity`)\r\n"
 						+ "from `orders`, `items`, `customers`\r\n"
 						+ "where `orders`.`Item_id` = `items`.`Item_id`\r\n"
 						+ "and `orders`.`Cust_id` = `customers`.`Cust_id` ORDER BY Order_id");) {
