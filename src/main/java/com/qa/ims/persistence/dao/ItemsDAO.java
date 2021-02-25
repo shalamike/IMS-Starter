@@ -17,6 +17,14 @@ import com.qa.ims.utils.DBUtils;
 public class ItemsDAO implements Dao<Items>{
 	
 	public static final Logger LOGGER = LogManager.getLogger();
+	@Override
+	public Items modelFromResultSet(ResultSet resultSet) throws SQLException {
+
+		Long Item_id = resultSet.getLong("Item_id");
+		String itemName = resultSet.getString("item_name");
+		double itemPrice = resultSet.getDouble("item_price");
+		return new Items(Item_id, itemName, itemPrice);
+	}
 
 	@Override
 	public List<Items> readAll() {
@@ -70,7 +78,7 @@ public class ItemsDAO implements Dao<Items>{
 				PreparedStatement statement = connection
 						.prepareStatement("INSERT INTO items(item_name, item_price) VALUES (?, ?)");) {
 			statement.setString(1, items.getItemName());
-			statement.setFloat(2, items.getitemPrice());
+			statement.setDouble(2, items.getitemPrice());
 			statement.executeUpdate();
 			return readLatest();
 		} catch (Exception e) {
@@ -86,7 +94,7 @@ public class ItemsDAO implements Dao<Items>{
 				PreparedStatement statement = connection
 						.prepareStatement("UPDATE items SET item_name = ?, item_price = ? WHERE Item_id = ?");) {
 			statement.setString(1, items.getItemName());
-			statement.setFloat(2, items.getitemPrice());
+			statement.setDouble(2, items.getitemPrice());
 			statement.setLong(3, items.getItem_id());
 			statement.executeUpdate();
 			return read(items.getItem_id());
@@ -110,14 +118,6 @@ public class ItemsDAO implements Dao<Items>{
 		return 0;
 	}
 	
-	@Override
-	public Items modelFromResultSet(ResultSet resultSet) throws SQLException {
-
-		Long Item_id = resultSet.getLong("Item_id");
-		String itemName = resultSet.getString("item_name");
-		float itemPrice = resultSet.getFloat("item_price");
-		return new Items(Item_id, itemName, itemPrice);
-	}
 
 
 }

@@ -1,10 +1,11 @@
-drop schema `ims` cascade;
+drop schema `ims`;
 create schema if not exists `ims`;
 
 use `ims`;
 
-
-drop table if exists `customers` cascade;
+drop table if exists `orders` ;
+drop table if exists `items` ;
+drop table if exists `customers` ;
 
 
 CREATE TABLE IF NOT EXISTS `customers` (
@@ -15,16 +16,16 @@ CREATE TABLE IF NOT EXISTS `customers` (
 );
 
 
-drop table if exists `items` cascade;
+
 
 CREATE TABLE IF NOT EXISTS `items`(
 		`Item_id` int(11) NOT NULL auto_increment,
         `item_name` varchar(40) default null,
-        `item_price` float(11) default null,
+        `item_price` double(11) default null,
         primary key (`Item_id`)
 );
 
-drop table if exists `orders` cascade;
+
 
 CREATE TABLE IF NOT EXISTS `orders` (
 	`Order_id` int(11) NOT NULL auto_increment,

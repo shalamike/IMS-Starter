@@ -14,7 +14,7 @@ import com.qa.ims.utils.DBUtils;
 public class CustomerDAOTest {
 
 	private final CustomerDAO DAO = new CustomerDAO();
-
+	
 	@Before
 	public void setup() {
 		DBUtils.connect();
