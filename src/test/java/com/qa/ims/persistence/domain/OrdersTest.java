@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 
+
 public class OrdersTest {
 	
 	Orders o1 = new Orders(1l, 1l, 4f);
@@ -67,10 +68,65 @@ public class OrdersTest {
 	}
 	
 	@Test
-	public void testGetCustomerId() {
-		assertSame(1l, o1.getcustId());
+	public void testGetItemId() {
+		assertSame(2l, o3.getitemId());
+	}
+	
+	@Test
+	public void testSetITemId() {
+		Orders o = new Orders(2l,1l, 2l, "dee", "jay", "coke", 3f, 1000f);
+		o.setcustId(2l);
+		assertSame(2l, o.getcustId());
+	}
+	
+	@Test
+	public void testGetItemQuantity() {
+		assertEquals(10f, o3.getItemQuantity(), 10f);
+	}
+	
+	@Test
+	public void testSetItemQuantity() {
+		Orders o = new Orders(2l,1l, 2l, "dee", "jay", "coke", 3f, 1000f);
+		o.setItemQuantity(2f);
+		assertEquals(2f, o.getItemQuantity(),2f);
+	}
+	
+	@Test
+	public void testGetCustomerName() {
+		assertEquals("mike larry", o3.getCustomerName());
+	}
+	
+	@Test
+	public void testSetCustomerName() {
+		Orders o = new Orders(2l,1l, 2l, "dee", "jay", "coke", 3f, 1000f);
+		o.setCustomerName("Michael Jenkins");
+		assertSame("Michael Jenkins", o.getCustomerName());
+	}
+	
+	@Test
+	public void testGetItemName() {
+		assertSame("coke", o3.getItemName());
+	}
+	
+	@Test
+	public void testSetItemName() {
+		Orders o = new Orders(2l,1l, 2l, "dee", "jay", "coke", 3f, 1000f);
+		o.setItemName("sprite");
+		assertSame("sprite", o.getItemName());
 	}
 	@Test
-	public void testSetCustomerId() {}
+	public void testGetOrderCost() {
+		assertEquals(5f, o3.getOrderCost(), 5f);
+	}
+	
+	@Test
+	public void TestSetOrderCost() {
+		Orders o = new Orders(2l,1l, 2l, "dee", "jay", "coke", 3f, 1000f);
+		o.setOrderCost(4f);
+		assertEquals(4f, o.getOrderCost(), 4f);
+	}
+	
+	@Test
+	public void testToString() {}
 	
 }

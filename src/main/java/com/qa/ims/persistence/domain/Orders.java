@@ -63,14 +63,6 @@ public class Orders {
 	public void setItemQuantity(float itemQuantity) {
 		this.itemQuantity = itemQuantity;
 	}
-	
-	public float getorderCost() {
-		return orderCost;
-	}
-
-	public void setorderCost(float orderCost) {
-		this.orderCost = orderCost;
-	}
 
 	public String getCustomerName() {
 		return customerName;
