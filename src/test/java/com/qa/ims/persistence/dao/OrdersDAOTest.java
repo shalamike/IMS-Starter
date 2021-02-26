@@ -1,6 +1,7 @@
 package com.qa.ims.persistence.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,13 +91,13 @@ public class OrdersDAOTest {
 	public void TestSqlException2() {
 		DBUtils.connect("dbsldfnsdf");
 		final Orders updated = new Orders(1L, 2l, 1l, "leroy", "Jenkins", "crisps", 20, 10f);
-		assertEquals(updated,DaoOrders.update(updated));
+		assertNull(DaoOrders.update(updated));
 	}
 	
 	@Test
 	public void TestSqlException3() {
 		DBUtils.connect("dbsldfnsdf");
-		assertEquals(new Orders(1l, 1l, 1l, 10f), DaoOrders.read(1l));
+		assertNull( DaoOrders.read(1l));
 	}
 
 
