@@ -1,4 +1,4 @@
-Coverage: IMS-Starter 83.4%, src/main/java 80.1
+Coverage: IMS-Starter 83.4%, src/main/java 80.1%
 # Project Title
 
 One Paragraph of project description goes here
@@ -22,30 +22,17 @@ Give examples
 once you have completed the getting started steps on the command prompt. run the java program by entering
  run java- jar ims-0.0.1-jar-with-dependencies.jar
 
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
 
 
 ## Running the tests
 
-Explain how to run the automated tests for this system. Break down into which tests and what they do
+use mvn test on the command prompt and enter the following
+mvn test
+mvn jacoco:report
 
-### Unit Tests 
 
-Explain what these tests test, why and how to run them
 
-```
-Give an example
+### example run of the program
 
 Welcome to the Inventory Management System!
 Which entity would you like to use?
@@ -54,7 +41,13 @@ ITEM: Individual Items
 ORDER: Purchases of items
 STOP: To close the application
 
-if order is selected
+if either order, item or customer is selected enter,
+
+CREATE: To save a new entity into the database
+READ: To read an entity from the database
+UPDATE: To change an entity already in the database
+DELETE: To remove an entity from the database
+RETURN: To return to domain selection
 
 
 ## Built With
@@ -77,7 +70,8 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 *For help in [Choosing a license](https://choosealicense.com/)*
 
 ## Acknowledgments
-
-* Hat tip to anyone whose code was used
+* Jordan Harrison - https://github.com/JHarry444
+* Edward Reynolds - https://github.com/Edrz-96
+* 
 * Inspiration
 * etc
